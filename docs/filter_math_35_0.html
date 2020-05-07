@@ -1,0 +1,105 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 800;
+            height: 800;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"id": "376651", "label": "376651", "shape": "dot"}, {"id": "1376155", "label": "1376155", "shape": "dot"}, {"id": "967892", "label": "967892", "shape": "dot"}, {"id": "1373869", "label": "1373869", "shape": "dot"}, {"id": "451049", "label": "451049", "shape": "dot"}, {"id": "489169", "label": "489169", "shape": "dot"}, {"id": "425715", "label": "425715", "shape": "dot"}, {"id": "156031", "label": "156031", "shape": "dot"}, {"id": "83939", "label": "83939", "shape": "dot"}, {"id": "1303495", "label": "1303495", "shape": "dot"}, {"id": "1103785", "label": "1103785", "shape": "dot"}, {"id": "826397", "label": "826397", "shape": "dot"}, {"id": "1427717", "label": "1427717", "shape": "dot"}, {"id": "1597089", "label": "1597089", "shape": "dot"}, {"id": "1457768", "label": "1457768", "shape": "dot"}, {"id": "495352", "label": "495352", "shape": "dot"}, {"id": "801488", "label": "801488", "shape": "dot"}, {"id": "720806", "label": "720806", "shape": "dot"}, {"id": "315765", "label": "315765", "shape": "dot"}, {"id": "757642", "label": "757642", "shape": "dot"}, {"id": "1227584", "label": "1227584", "shape": "dot"}, {"id": "619653", "label": "619653", "shape": "dot"}, {"id": "1704429", "label": "1704429", "shape": "dot"}, {"id": "783002", "label": "783002", "shape": "dot"}, {"id": "1019754", "label": "1019754", "shape": "dot"}, {"id": "185153", "label": "185153", "shape": "dot"}, {"id": "1614061", "label": "1614061", "shape": "dot"}, {"id": "1427730", "label": "1427730", "shape": "dot"}, {"id": "488986", "label": "488986", "shape": "dot"}, {"id": "506172", "label": "506172", "shape": "dot"}, {"id": "1172346", "label": "1172346", "shape": "dot"}, {"id": "809229", "label": "809229", "shape": "dot"}, {"id": "1602233", "label": "1602233", "shape": "dot"}, {"id": "526018", "label": "526018", "shape": "dot"}, {"id": "1219906", "label": "1219906", "shape": "dot"}]);
+        edges = new vis.DataSet([{"from": "376651", "to": "526018", "value": 1.0, "weight": 1.0}, {"from": "376651", "to": "1602233", "value": 1.0, "weight": 1.0}, {"from": "376651", "to": "1172346", "value": 2.0, "weight": 2.0}, {"from": "376651", "to": "1427717", "value": 1.0, "weight": 1.0}, {"from": "376651", "to": "425715", "value": 1.0, "weight": 1.0}, {"from": "376651", "to": "1597089", "value": 1.0, "weight": 1.0}, {"from": "1376155", "to": "809229", "value": 1.0, "weight": 1.0}, {"from": "1376155", "to": "488986", "value": 1.0, "weight": 1.0}, {"from": "967892", "to": "720806", "value": 1.0, "weight": 1.0}, {"from": "967892", "to": "1103785", "value": 1.0, "weight": 1.0}, {"from": "1373869", "to": "1172346", "value": 2.0, "weight": 2.0}, {"from": "1373869", "to": "1704429", "value": 1.0, "weight": 1.0}, {"from": "451049", "to": "489169", "value": 1.0, "weight": 1.0}, {"from": "451049", "to": "1602233", "value": 1.0, "weight": 1.0}, {"from": "489169", "to": "1602233", "value": 1.0, "weight": 1.0}, {"from": "156031", "to": "826397", "value": 1.0, "weight": 1.0}, {"from": "156031", "to": "1602233", "value": 2.0, "weight": 2.0}, {"from": "83939", "to": "1172346", "value": 2.0, "weight": 2.0}, {"from": "1303495", "to": "1172346", "value": 1.0, "weight": 1.0}, {"from": "1303495", "to": "1602233", "value": 1.0, "weight": 1.0}, {"from": "1103785", "to": "720806", "value": 1.0, "weight": 1.0}, {"from": "826397", "to": "315765", "value": 1.0, "weight": 1.0}, {"from": "826397", "to": "185153", "value": 1.0, "weight": 1.0}, {"from": "826397", "to": "1602233", "value": 1.0, "weight": 1.0}, {"from": "1427717", "to": "783002", "value": 1.0, "weight": 1.0}, {"from": "1427717", "to": "1597089", "value": 1.0, "weight": 1.0}, {"from": "1457768", "to": "1172346", "value": 1.0, "weight": 1.0}, {"from": "495352", "to": "488986", "value": 1.0, "weight": 1.0}, {"from": "495352", "to": "506172", "value": 1.0, "weight": 1.0}, {"from": "801488", "to": "720806", "value": 1.0, "weight": 1.0}, {"from": "720806", "to": "1427730", "value": 2.0, "weight": 2.0}, {"from": "720806", "to": "1614061", "value": 1.0, "weight": 1.0}, {"from": "720806", "to": "488986", "value": 6.0, "weight": 6.0}, {"from": "720806", "to": "1019754", "value": 1.0, "weight": 1.0}, {"from": "720806", "to": "506172", "value": 2.0, "weight": 2.0}, {"from": "315765", "to": "488986", "value": 2.0, "weight": 2.0}, {"from": "315765", "to": "185153", "value": 3.0, "weight": 3.0}, {"from": "757642", "to": "1172346", "value": 2.0, "weight": 2.0}, {"from": "1227584", "to": "488986", "value": 1.0, "weight": 1.0}, {"from": "1227584", "to": "1614061", "value": 1.0, "weight": 1.0}, {"from": "619653", "to": "1172346", "value": 1.0, "weight": 1.0}, {"from": "1704429", "to": "1172346", "value": 1.0, "weight": 1.0}, {"from": "1019754", "to": "1614061", "value": 1.0, "weight": 1.0}, {"from": "185153", "to": "488986", "value": 2.0, "weight": 2.0}, {"from": "1614061", "to": "488986", "value": 1.0, "weight": 1.0}, {"from": "1427730", "to": "488986", "value": 1.0, "weight": 1.0}, {"from": "488986", "to": "809229", "value": 1.0, "weight": 1.0}, {"from": "488986", "to": "1219906", "value": 1.0, "weight": 1.0}, {"from": "488986", "to": "506172", "value": 7.0, "weight": 7.0}, {"from": "506172", "to": "1219906", "value": 1.0, "weight": 1.0}, {"from": "1172346", "to": "1602233", "value": 1.0, "weight": 1.0}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

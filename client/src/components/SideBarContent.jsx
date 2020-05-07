@@ -4,7 +4,7 @@ import MenuItem from './MenuItem'
 import IconText from './IconText'
 import PropTypes from 'prop-types'
 import { useColorMode } from 'theme-ui'
-import { mdiCircleSlice4, mdiGraphql } from '@mdi/js'
+import { mdiCircleSlice4, mdiFilter, mdiGraphql } from '@mdi/js'
 import Button from './Button'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
@@ -42,6 +42,7 @@ const SideBarContent = () => {
   const [graphUrls, setGraphUrls] = useState([])
   useEffect(() => {
     axios.get('/api/graphs').then(({ data }) => {
+      console.log(data)
       setGraphUrls(data.files)
     })
   }, [])
@@ -72,19 +73,24 @@ const SideBarContent = () => {
         </Flex>
       </Box>
       <Box sx={{ overflowY: 'auto', flex: 1 }}>
-        {/* My Courses */}
+        <Box mb={4}>
+          <Box pt={3} px={3}>
+            <Heading variant={'subheading'} color={'blue.1'}>Functions</Heading>
+          </Box>
+          <SideBarItem href={`/filter-author`} path={mdiFilter}>Filter Author</SideBarItem>
+        </Box>
+
         <Box mb={4}>
           <Box pt={3} px={3}>
             <Heading variant={'subheading'} color={'blue.1'}>Graphs</Heading>
           </Box>
           {
             graphUrls.map(url => (
-              <SideBarItem href={`/graphs/${url.replace('.html', '')}`} path={mdiGraphql}>{url}</SideBarItem>
+              <SideBarItem key={url} href={`/graphs/${url.replace('.html', '')}`} path={mdiGraphql}>{url}</SideBarItem>
             ))
           }
         </Box>
 
-        {/* Buttons */}
       </Box>
       <Box sx={{ textAlign: 'center', p: 2 }}>
         <Button

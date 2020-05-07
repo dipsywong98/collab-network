@@ -5,8 +5,10 @@ import theme from './theme'
 import SideBar from './components/SideBar'
 import { Box } from '@theme-ui/components'
 import { BrowserRouter as Router, Route, Switch, } from 'react-router-dom'
-import Home from './components/Home'
+import Home from './Pages/Home'
 import EmbedGraph from './components/EmbedGraph'
+import Graphs from './Pages/Graphs'
+import Filter from './Pages/Filter'
 
 const MyGlobal = () => (
   <Global
@@ -49,13 +51,16 @@ function App() {
         transition: '0.3s grid-template-columns ease'
       }}>
         <SideBar/>
-        <Box sx={{ gridArea: 'content' }}>
+        <Box sx={{ gridArea: 'content', overflow: 'auto' }}>
           <Switch>
             <Route exact path="/">
               <Home/>
             </Route>
             <Route path='/graphs/:graph'>
-              <EmbedGraph/>
+              <Graphs/>
+            </Route>
+            <Route path='/filter-author'>
+              <Filter/>
             </Route>
           </Switch>
         </Box>

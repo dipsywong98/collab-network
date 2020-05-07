@@ -1,16 +1,15 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 
-const EmbedGraph = () => {
-  const { graph } = useParams()
+const EmbedGraph = ({ graph }) => {
   return (
     <iframe
       style={{
-        height: '100%',
-        width: '100%',
+        height: '830px',
+        width: '830px',
         borderStyle: 'none'
       }}
-      src={`/graphFiles/${graph}.html`}
+      src={`/graphFiles/${graph.replace(/\.html$/,'')}.html`}
     />
   )
 }

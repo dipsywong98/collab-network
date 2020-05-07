@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
+import { AxiosProvider } from './components/Axios'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App/>
+    <AxiosProvider>
+      <App/>
+    </AxiosProvider>
   </React.StrictMode>,
   document.getElementById('root')
 )
