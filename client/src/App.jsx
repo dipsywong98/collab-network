@@ -9,6 +9,7 @@ import Home from './Pages/Home'
 import Graphs from './Pages/Graphs'
 import Subgraphs from './Pages/Subgraphs'
 import Authors from './Pages/Authors'
+import Path from './Pages/Path'
 
 const MyGlobal = () => (
   <Global
@@ -64,6 +65,9 @@ function App() {
             </Route>
             <Route path='/authors'>
               <Authors/>
+            </Route>
+            <Route path='/path'>
+              <Path/>
             </Route>
           </Switch>
         </Box>

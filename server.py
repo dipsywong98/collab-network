@@ -80,6 +80,16 @@ def filter_count():
     return jsonify({"length": len(filter_authors(query))})
 
 
+@app.route('/api/filter/byid', methods=['POST'])
+def filter_byid():
+    """
+    count number of authors that matches the query
+    :return:
+    """
+    ids = request.get_json()['ids']
+    return jsonify(author_by_ids(ids))
+
+
 @app.route('/api/graph', methods=['POST'])
 def build_graph():
     """
@@ -103,7 +113,7 @@ def build_graph():
 
 
 @app.route('/api/path', methods=['POST'])
-def path():
+def get_path():
     """
     given source and target, build the path graph
     :return:
@@ -111,8 +121,17 @@ def path():
     body = request.get_json()
     source = body['source']
     target = body['target']
-    name = body['name']
-    return jsonify({"name": name})
+    try:
+        path = nx.shortest_path(whole_graph, source, target)
+        subgraph = whole_graph.subgraph(path)
+        if 'name' in body:
+            name = body['name']
+        else:
+            name = 'path_%s_%s.html' % (source, target)
+        visualize(subgraph, name)
+        return jsonify({"name": name, 'path': path})
+    except nx.exception.NetworkXNoPath:
+        return jsonify({'error': 'no path between %s and %s' % (source, target)})
 
 
 # @app.route('/<path:path>')

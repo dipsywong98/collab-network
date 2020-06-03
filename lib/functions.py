@@ -37,8 +37,8 @@ def filter_authors(values):
 
 def filter_authors_select(values, fields=None):
     """
+    :param values:
     :param fields:
-    :param column_values_tuples: [(column_name, [values])]
     :return:
     """
     if fields is None:
@@ -54,3 +54,16 @@ def filter_authors_select(values, fields=None):
         print(sql, all_values)
         rows = conn.cursor().execute(sql, all_values).fetchall()
         return rows
+
+
+def author_by_ids(ids):
+    """
+    :param: values
+    :return:
+    """
+    with create_connection(database_file) as conn:
+        sql = f"""
+            SELECT * FROM authors WHERE id in ({','.join(['?'] * len(ids))})
+            """
+        rows = conn.cursor().execute(sql, ids).fetchall()
+        return [Author(row) for row in rows]

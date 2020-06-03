@@ -4,18 +4,7 @@ import Input from '../components/Input'
 import Button from '../components/Button'
 import { useAxios } from '../components/Axios'
 import Paginate from '../components/Paginate'
-import tableBuilder, { SmallLabel } from '../components/ResponsiveTable'
-
-const AuthorTable = tableBuilder(['ID', 'Name', 'Institute', 'Tags'], ({ it: author }) => {
-  return (
-    <>
-      <Box>{author.id}</Box>
-      <Box><SmallLabel>Name</SmallLabel> {author.n}</Box>
-      <Box><SmallLabel>Institute</SmallLabel> {author.a}</Box>
-      <Box><SmallLabel>Tags</SmallLabel> {author.t}</Box>
-    </>
-  )
-}, ['1fr', null, null, '100px 1fr 2fr 3fr'])
+import AuthorTable from '../components/AuthorTable'
 
 const Authors = () => {
   const length = 20

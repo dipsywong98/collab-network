@@ -4,6 +4,7 @@ import { useAxios } from './Axios'
 import EmbedGraph from '../components/EmbedGraph'
 import CollapsibleWell from './CollapsibleWell'
 import Paginate from './Paginate'
+import { AuthorTableByIds } from './AuthorTable'
 
 const SubgraphCollapsible = ({ id, name, graph }) => {
   const axios = useAxios()
@@ -27,6 +28,7 @@ const SubgraphCollapsible = ({ id, name, graph }) => {
         {response.error && <Text>error: {response.error}</Text>}
         {response.message && <Text>{response.message}</Text>}
       </Box> : 'loading'}
+      <AuthorTableByIds ids={graph}/>
     </CollapsibleWell>
   )
 
@@ -70,9 +72,7 @@ const Insight = ({ activeQuery, subgraphs }) => {
           <CollapsibleWell key={size}
             header={`${graphs.length} subgraph${graphs.length && 's'} of size ${size} `}
             defaultOpen={false}>
-            {
-              <GraphsOfSize activeQuery={activeQuery} size={size} graphs={graphs}/>
-            }
+            <GraphsOfSize activeQuery={activeQuery} size={size} graphs={graphs}/>
           </CollapsibleWell>
         ))
       }
