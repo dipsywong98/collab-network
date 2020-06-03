@@ -1,20 +1,18 @@
 import React, { useMemo, useState } from 'react'
-import { Box, Container, Flex, Heading, Text } from '@theme-ui/components'
-import Input from '../components/Input'
-import Button from '../components/Button'
+import { Box, Text } from '@theme-ui/components'
 import { useAxios } from './Axios'
 import EmbedGraph from '../components/EmbedGraph'
-import * as R from 'ramda'
 import CollapsibleWell from './CollapsibleWell'
 import Paginate from './Paginate'
 
 const SubgraphCollapsible = ({ id, name, graph }) => {
   const axios = useAxios()
   const [loaded, setLoaded] = useState(false)
+  const [response, setResponse] = useState({})
   const viewGraph = ids => {
     return new Promise(resolve => axios.post('/api/graph', { ids, name }).then(({ data }) => {
-      // setGraphName(data.name)
-      resolve(name)
+      resolve(true)
+      setResponse(data)
     }))
   }
   const handleOpen = async () => {
@@ -22,7 +20,13 @@ const SubgraphCollapsible = ({ id, name, graph }) => {
   }
   return (
     <CollapsibleWell key={id} header={`#${id}`} onOpen={handleOpen} defaultOpen={false}>
-      {loaded ? <EmbedGraph graph={loaded}/> : 'loading'}
+      {loaded ? <Box>
+        {response.max_degree && response.argmax_degree &&
+        <Text>max degree is {response.max_degree} and id {response.argmax_degree.join(',')}</Text>}
+        {response.name && <EmbedGraph graph={response.name}/>}
+        {response.error && <Text>error: {response.error}</Text>}
+        {response.message && <Text>{response.message}</Text>}
+      </Box> : 'loading'}
     </CollapsibleWell>
   )
 
@@ -46,7 +50,6 @@ const GraphsOfSize = ({ activeQuery, size, graphs }) => {
 }
 
 const Insight = ({ activeQuery, subgraphs }) => {
-  const axios = useAxios()
   const groups = useMemo(() => {
     const g = {}
     subgraphs.forEach((graph) => {

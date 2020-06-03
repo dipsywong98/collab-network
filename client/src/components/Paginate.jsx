@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { Box } from '@theme-ui/components'
 import ButtonGroup from './ButtonGroup'
@@ -7,29 +7,27 @@ import { mdiChevronLeft, mdiChevronRight, mdiDotsHorizontal } from '@mdi/js'
 import IconButton from './IconButton'
 import Icon from './Icon'
 
-const Paginate = props => {
-  const [currPage, setCurrPage] = useState(props.page || 0)
-  useEffect(() => {
-    props.onChange && props.onChange(currPage)
-  }, [currPage])
-  const numPages = props.numPages
-  const showPages = props.showPages || 5
+const Paginate = ({ page, onChange, numPages, showPages = 5, ...props }) => {
+  const handlePageChange = page => {
+    onChange && onChange(page)
+  }
   const range = new Array(Math.min(showPages, numPages)).fill('').map((_, k) => k).map(k => {
-    if (currPage < Math.floor(showPages / 2)) {
+    if (page < Math.floor(showPages / 2)) {
       return k
     }
-    if (currPage >= numPages - Math.floor(showPages / 2)) {
+    if (page >= numPages - Math.floor(showPages / 2)) {
       return numPages - showPages + k
     }
-    return currPage + k - Math.floor(showPages / 2)
+    return page + k - Math.floor(showPages / 2)
   })
   if (range.length === 0) return ''
-  return <ButtonGroup>
-    <IconButton variant='normal-md' path={mdiChevronLeft} disabled={currPage === 1}/>
+  return <ButtonGroup {...props}>
+    <IconButton type='button' variant='normal-md' path={mdiChevronLeft} disabled={page === 1}/>
     {!range.includes(0) && <>
       <Button
+        type='button'
         variant='normal-md'
-        onClick={() => setCurrPage(0)}>
+        onClick={() => handlePageChange(0)}>
         1
       </Button>
       <Box>
@@ -37,20 +35,22 @@ const Paginate = props => {
       </Box>
     </>}
     {range.map(k => <Button
+      type='button'
       key={k}
-      variant={k === currPage ? 'primary-md' : 'normal-md'}
-      onClick={() => setCurrPage(k)}>{k + 1}</Button>)}
+      variant={k === page ? 'primary-md' : 'normal-md'}
+      onClick={() => handlePageChange(k)}>{k + 1}</Button>)}
     {!range.includes(numPages - 1) && <>
       <Box>
         <Icon path={mdiDotsHorizontal}/>
       </Box>
       <Button
+        type='button'
         variant='normal-md'
-        onClick={() => setCurrPage(numPages - 1)}>
+        onClick={() => handlePageChange(numPages - 1)}>
         {numPages}
       </Button>
     </>}
-    <IconButton variant='normal-md' path={mdiChevronRight} disabled={currPage === numPages}/>
+    <IconButton type='button' variant='normal-md' path={mdiChevronRight} disabled={page === numPages}/>
   </ButtonGroup>
 }
 

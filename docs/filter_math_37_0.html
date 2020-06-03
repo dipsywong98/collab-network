@@ -42,43 +42,274 @@
     
     // This method is responsible for drawing the graph, returns the drawn network
     function drawGraph() {
-        var container = document.getElementById('mynetwork');
-        
-        
+      var container = document.getElementById('mynetwork')
 
-        // parsing and collecting nodes and edges from the python
-        nodes = new vis.DataSet([{"id": "1493208", "label": "1493208", "shape": "dot"}, {"id": "324647", "label": "324647", "shape": "dot"}, {"id": "278258", "label": "278258", "shape": "dot"}, {"id": "630593", "label": "630593", "shape": "dot"}, {"id": "1115584", "label": "1115584", "shape": "dot"}, {"id": "936730", "label": "936730", "shape": "dot"}, {"id": "1114701", "label": "1114701", "shape": "dot"}, {"id": "185681", "label": "185681", "shape": "dot"}, {"id": "233775", "label": "233775", "shape": "dot"}, {"id": "1116315", "label": "1116315", "shape": "dot"}, {"id": "1624175", "label": "1624175", "shape": "dot"}, {"id": "1205833", "label": "1205833", "shape": "dot"}, {"id": "1059734", "label": "1059734", "shape": "dot"}, {"id": "1450526", "label": "1450526", "shape": "dot"}, {"id": "381534", "label": "381534", "shape": "dot"}, {"id": "176369", "label": "176369", "shape": "dot"}, {"id": "683542", "label": "683542", "shape": "dot"}, {"id": "197743", "label": "197743", "shape": "dot"}, {"id": "47511", "label": "47511", "shape": "dot"}, {"id": "1292445", "label": "1292445", "shape": "dot"}, {"id": "21849", "label": "21849", "shape": "dot"}, {"id": "1633689", "label": "1633689", "shape": "dot"}, {"id": "229068", "label": "229068", "shape": "dot"}, {"id": "1149991", "label": "1149991", "shape": "dot"}, {"id": "577893", "label": "577893", "shape": "dot"}, {"id": "1364769", "label": "1364769", "shape": "dot"}, {"id": "858353", "label": "858353", "shape": "dot"}, {"id": "180136", "label": "180136", "shape": "dot"}, {"id": "978798", "label": "978798", "shape": "dot"}, {"id": "1106879", "label": "1106879", "shape": "dot"}, {"id": "292270", "label": "292270", "shape": "dot"}, {"id": "1012261", "label": "1012261", "shape": "dot"}, {"id": "215862", "label": "215862", "shape": "dot"}, {"id": "198969", "label": "198969", "shape": "dot"}, {"id": "170499", "label": "170499", "shape": "dot"}, {"id": "171294", "label": "171294", "shape": "dot"}, {"id": "975653", "label": "975653", "shape": "dot"}]);
-        edges = new vis.DataSet([{"from": "1493208", "to": "185681", "value": 1.0, "weight": 1.0}, {"from": "1493208", "to": "171294", "value": 1.0, "weight": 1.0}, {"from": "1493208", "to": "1106879", "value": 1.0, "weight": 1.0}, {"from": "1493208", "to": "936730", "value": 1.0, "weight": 1.0}, {"from": "1493208", "to": "1059734", "value": 1.0, "weight": 1.0}, {"from": "324647", "to": "185681", "value": 1.0, "weight": 1.0}, {"from": "324647", "to": "1115584", "value": 1.0, "weight": 1.0}, {"from": "278258", "to": "185681", "value": 1.0, "weight": 1.0}, {"from": "630593", "to": "185681", "value": 1.0, "weight": 1.0}, {"from": "630593", "to": "215862", "value": 1.0, "weight": 1.0}, {"from": "630593", "to": "1624175", "value": 1.0, "weight": 1.0}, {"from": "1115584", "to": "185681", "value": 1.0, "weight": 1.0}, {"from": "936730", "to": "185681", "value": 1.0, "weight": 1.0}, {"from": "936730", "to": "171294", "value": 1.0, "weight": 1.0}, {"from": "936730", "to": "1106879", "value": 1.0, "weight": 1.0}, {"from": "936730", "to": "1059734", "value": 1.0, "weight": 1.0}, {"from": "1114701", "to": "185681", "value": 1.0, "weight": 1.0}, {"from": "1114701", "to": "381534", "value": 1.0, "weight": 1.0}, {"from": "185681", "to": "577893", "value": 1.0, "weight": 1.0}, {"from": "185681", "to": "170499", "value": 1.0, "weight": 1.0}, {"from": "185681", "to": "215862", "value": 1.0, "weight": 1.0}, {"from": "185681", "to": "233775", "value": 1.0, "weight": 1.0}, {"from": "185681", "to": "858353", "value": 1.0, "weight": 1.0}, {"from": "185681", "to": "1624175", "value": 1.0, "weight": 1.0}, {"from": "185681", "to": "171294", "value": 1.0, "weight": 1.0}, {"from": "185681", "to": "176369", "value": 1.0, "weight": 1.0}, {"from": "185681", "to": "1149991", "value": 1.0, "weight": 1.0}, {"from": "185681", "to": "1633689", "value": 1.0, "weight": 1.0}, {"from": "185681", "to": "180136", "value": 1.0, "weight": 1.0}, {"from": "185681", "to": "21849", "value": 1.0, "weight": 1.0}, {"from": "185681", "to": "292270", "value": 3.0, "weight": 3.0}, {"from": "185681", "to": "683542", "value": 2.0, "weight": 2.0}, {"from": "185681", "to": "381534", "value": 1.0, "weight": 1.0}, {"from": "185681", "to": "1059734", "value": 1.0, "weight": 1.0}, {"from": "185681", "to": "1106879", "value": 1.0, "weight": 1.0}, {"from": "185681", "to": "1205833", "value": 1.0, "weight": 1.0}, {"from": "185681", "to": "198969", "value": 1.0, "weight": 1.0}, {"from": "185681", "to": "197743", "value": 1.0, "weight": 1.0}, {"from": "185681", "to": "1292445", "value": 1.0, "weight": 1.0}, {"from": "185681", "to": "975653", "value": 1.0, "weight": 1.0}, {"from": "185681", "to": "1116315", "value": 1.0, "weight": 1.0}, {"from": "185681", "to": "978798", "value": 1.0, "weight": 1.0}, {"from": "185681", "to": "1364769", "value": 1.0, "weight": 1.0}, {"from": "185681", "to": "1450526", "value": 3.0, "weight": 3.0}, {"from": "185681", "to": "47511", "value": 1.0, "weight": 1.0}, {"from": "1116315", "to": "1364769", "value": 1.0, "weight": 1.0}, {"from": "1116315", "to": "47511", "value": 1.0, "weight": 1.0}, {"from": "1116315", "to": "1149991", "value": 1.0, "weight": 1.0}, {"from": "1624175", "to": "215862", "value": 1.0, "weight": 1.0}, {"from": "1059734", "to": "171294", "value": 1.0, "weight": 1.0}, {"from": "1059734", "to": "1106879", "value": 1.0, "weight": 1.0}, {"from": "1450526", "to": "21849", "value": 1.0, "weight": 1.0}, {"from": "1450526", "to": "197743", "value": 1.0, "weight": 1.0}, {"from": "47511", "to": "1364769", "value": 1.0, "weight": 1.0}, {"from": "47511", "to": "1149991", "value": 1.0, "weight": 1.0}, {"from": "229068", "to": "577893", "value": 1.0, "weight": 1.0}, {"from": "229068", "to": "1012261", "value": 2.0, "weight": 2.0}, {"from": "229068", "to": "858353", "value": 1.0, "weight": 1.0}, {"from": "229068", "to": "292270", "value": 2.0, "weight": 2.0}, {"from": "1149991", "to": "1364769", "value": 1.0, "weight": 1.0}, {"from": "577893", "to": "170499", "value": 1.0, "weight": 1.0}, {"from": "858353", "to": "292270", "value": 2.0, "weight": 2.0}, {"from": "180136", "to": "978798", "value": 1.0, "weight": 1.0}, {"from": "1106879", "to": "171294", "value": 1.0, "weight": 1.0}]);
 
-        // adding nodes and edges to the graph
-        data = {nodes: nodes, edges: edges};
+      // parsing and collecting nodes and edges from the python
+      nodes = new vis.DataSet([{ 'id': '1624175', 'label': '1624175', 'shape': 'dot' }, {
+        'id': '229068',
+        'label': '229068',
+        'shape': 'dot'
+      }, { 'id': '978798', 'label': '978798', 'shape': 'dot' }, {
+        'id': '180136',
+        'label': '180136',
+        'shape': 'dot'
+      }, { 'id': '278258', 'label': '278258', 'shape': 'dot' }, {
+        'id': '292270',
+        'label': '292270',
+        'shape': 'dot'
+      }, { 'id': '1364769', 'label': '1364769', 'shape': 'dot' }, {
+        'id': '936730',
+        'label': '936730',
+        'shape': 'dot'
+      }, { 'id': '1292445', 'label': '1292445', 'shape': 'dot' }, {
+        'id': '858353',
+        'label': '858353',
+        'shape': 'dot'
+      }, { 'id': '324647', 'label': '324647', 'shape': 'dot' }, {
+        'id': '1012261',
+        'label': '1012261',
+        'shape': 'dot'
+      }, { 'id': '1205833', 'label': '1205833', 'shape': 'dot' }, {
+        'id': '171294',
+        'label': '171294',
+        'shape': 'dot'
+      }, { 'id': '1116315', 'label': '1116315', 'shape': 'dot' }, {
+        'id': '233775',
+        'label': '233775',
+        'shape': 'dot'
+      }, { 'id': '21849', 'label': '21849', 'shape': 'dot' }, {
+        'id': '1493208',
+        'label': '1493208',
+        'shape': 'dot'
+      }, { 'id': '1149991', 'label': '1149991', 'shape': 'dot' }, {
+        'id': '683542',
+        'label': '683542',
+        'shape': 'dot'
+      }, { 'id': '1115584', 'label': '1115584', 'shape': 'dot' }, {
+        'id': '1633689',
+        'label': '1633689',
+        'shape': 'dot'
+      }, { 'id': '215862', 'label': '215862', 'shape': 'dot' }, {
+        'id': '1450526',
+        'label': '1450526',
+        'shape': 'dot'
+      }, { 'id': '1059734', 'label': '1059734', 'shape': 'dot' }, {
+        'id': '975653',
+        'label': '975653',
+        'shape': 'dot'
+      }, { 'id': '1106879', 'label': '1106879', 'shape': 'dot' }, {
+        'id': '198969',
+        'label': '198969',
+        'shape': 'dot'
+      }, { 'id': '381534', 'label': '381534', 'shape': 'dot' }, {
+        'id': '577893',
+        'label': '577893',
+        'shape': 'dot'
+      }, { 'id': '630593', 'label': '630593', 'shape': 'dot' }, {
+        'id': '185681',
+        'label': '185681',
+        'shape': 'dot'
+      }, { 'id': '1114701', 'label': '1114701', 'shape': 'dot' }, {
+        'id': '197743',
+        'label': '197743',
+        'shape': 'dot'
+      }, { 'id': '176369', 'label': '176369', 'shape': 'dot' }, {
+        'id': '170499',
+        'label': '170499',
+        'shape': 'dot'
+      }, { 'id': '47511', 'label': '47511', 'shape': 'dot' }])
+      edges = new vis.DataSet([{ 'from': '1624175', 'to': '185681', 'value': 1.0, 'weight': 1.0 }, {
+        'from': '1624175',
+        'to': '215862',
+        'value': 1.0,
+        'weight': 1.0
+      }, { 'from': '1624175', 'to': '630593', 'value': 1.0, 'weight': 1.0 }, {
+        'from': '229068',
+        'to': '577893',
+        'value': 1.0,
+        'weight': 1.0
+      }, { 'from': '229068', 'to': '1012261', 'value': 2.0, 'weight': 2.0 }, {
+        'from': '229068',
+        'to': '858353',
+        'value': 1.0,
+        'weight': 1.0
+      }, { 'from': '229068', 'to': '292270', 'value': 2.0, 'weight': 2.0 }, {
+        'from': '978798',
+        'to': '185681',
+        'value': 1.0,
+        'weight': 1.0
+      }, { 'from': '978798', 'to': '180136', 'value': 1.0, 'weight': 1.0 }, {
+        'from': '180136',
+        'to': '185681',
+        'value': 1.0,
+        'weight': 1.0
+      }, { 'from': '278258', 'to': '185681', 'value': 1.0, 'weight': 1.0 }, {
+        'from': '292270',
+        'to': '185681',
+        'value': 3.0,
+        'weight': 3.0
+      }, { 'from': '292270', 'to': '858353', 'value': 2.0, 'weight': 2.0 }, {
+        'from': '1364769',
+        'to': '185681',
+        'value': 1.0,
+        'weight': 1.0
+      }, { 'from': '1364769', 'to': '47511', 'value': 1.0, 'weight': 1.0 }, {
+        'from': '1364769',
+        'to': '1116315',
+        'value': 1.0,
+        'weight': 1.0
+      }, { 'from': '1364769', 'to': '1149991', 'value': 1.0, 'weight': 1.0 }, {
+        'from': '936730',
+        'to': '185681',
+        'value': 1.0,
+        'weight': 1.0
+      }, { 'from': '936730', 'to': '171294', 'value': 1.0, 'weight': 1.0 }, {
+        'from': '936730',
+        'to': '1106879',
+        'value': 1.0,
+        'weight': 1.0
+      }, { 'from': '936730', 'to': '1059734', 'value': 1.0, 'weight': 1.0 }, {
+        'from': '936730',
+        'to': '1493208',
+        'value': 1.0,
+        'weight': 1.0
+      }, { 'from': '1292445', 'to': '185681', 'value': 1.0, 'weight': 1.0 }, {
+        'from': '858353',
+        'to': '185681',
+        'value': 1.0,
+        'weight': 1.0
+      }, { 'from': '324647', 'to': '185681', 'value': 1.0, 'weight': 1.0 }, {
+        'from': '324647',
+        'to': '1115584',
+        'value': 1.0,
+        'weight': 1.0
+      }, { 'from': '1205833', 'to': '185681', 'value': 1.0, 'weight': 1.0 }, {
+        'from': '171294',
+        'to': '185681',
+        'value': 1.0,
+        'weight': 1.0
+      }, { 'from': '171294', 'to': '1106879', 'value': 1.0, 'weight': 1.0 }, {
+        'from': '171294',
+        'to': '1493208',
+        'value': 1.0,
+        'weight': 1.0
+      }, { 'from': '171294', 'to': '1059734', 'value': 1.0, 'weight': 1.0 }, {
+        'from': '1116315',
+        'to': '185681',
+        'value': 1.0,
+        'weight': 1.0
+      }, { 'from': '1116315', 'to': '47511', 'value': 1.0, 'weight': 1.0 }, {
+        'from': '1116315',
+        'to': '1149991',
+        'value': 1.0,
+        'weight': 1.0
+      }, { 'from': '233775', 'to': '185681', 'value': 1.0, 'weight': 1.0 }, {
+        'from': '21849',
+        'to': '185681',
+        'value': 1.0,
+        'weight': 1.0
+      }, { 'from': '21849', 'to': '1450526', 'value': 1.0, 'weight': 1.0 }, {
+        'from': '1493208',
+        'to': '185681',
+        'value': 1.0,
+        'weight': 1.0
+      }, { 'from': '1493208', 'to': '1106879', 'value': 1.0, 'weight': 1.0 }, {
+        'from': '1493208',
+        'to': '1059734',
+        'value': 1.0,
+        'weight': 1.0
+      }, { 'from': '1149991', 'to': '185681', 'value': 1.0, 'weight': 1.0 }, {
+        'from': '1149991',
+        'to': '47511',
+        'value': 1.0,
+        'weight': 1.0
+      }, { 'from': '683542', 'to': '185681', 'value': 2.0, 'weight': 2.0 }, {
+        'from': '1115584',
+        'to': '185681',
+        'value': 1.0,
+        'weight': 1.0
+      }, { 'from': '1633689', 'to': '185681', 'value': 1.0, 'weight': 1.0 }, {
+        'from': '215862',
+        'to': '185681',
+        'value': 1.0,
+        'weight': 1.0
+      }, { 'from': '215862', 'to': '630593', 'value': 1.0, 'weight': 1.0 }, {
+        'from': '1450526',
+        'to': '185681',
+        'value': 3.0,
+        'weight': 3.0
+      }, { 'from': '1450526', 'to': '197743', 'value': 1.0, 'weight': 1.0 }, {
+        'from': '1059734',
+        'to': '185681',
+        'value': 1.0,
+        'weight': 1.0
+      }, { 'from': '1059734', 'to': '1106879', 'value': 1.0, 'weight': 1.0 }, {
+        'from': '975653',
+        'to': '185681',
+        'value': 1.0,
+        'weight': 1.0
+      }, { 'from': '1106879', 'to': '185681', 'value': 1.0, 'weight': 1.0 }, {
+        'from': '198969',
+        'to': '185681',
+        'value': 1.0,
+        'weight': 1.0
+      }, { 'from': '381534', 'to': '185681', 'value': 1.0, 'weight': 1.0 }, {
+        'from': '381534',
+        'to': '1114701',
+        'value': 1.0,
+        'weight': 1.0
+      }, { 'from': '577893', 'to': '170499', 'value': 1.0, 'weight': 1.0 }, {
+        'from': '577893',
+        'to': '185681',
+        'value': 1.0,
+        'weight': 1.0
+      }, { 'from': '630593', 'to': '185681', 'value': 1.0, 'weight': 1.0 }, {
+        'from': '185681',
+        'to': '170499',
+        'value': 1.0,
+        'weight': 1.0
+      }, { 'from': '185681', 'to': '176369', 'value': 1.0, 'weight': 1.0 }, {
+        'from': '185681',
+        'to': '1114701',
+        'value': 1.0,
+        'weight': 1.0
+      }, { 'from': '185681', 'to': '197743', 'value': 1.0, 'weight': 1.0 }, {
+        'from': '185681',
+        'to': '47511',
+        'value': 1.0,
+        'weight': 1.0
+      }])
 
-        var options = {
-    "configure": {
-        "enabled": false
-    },
-    "edges": {
-        "color": {
-            "inherit": true
+      // adding nodes and edges to the graph
+      data = { nodes: nodes, edges: edges }
+
+      var options = {
+        'configure': {
+          'enabled': false
         },
-        "smooth": {
-            "enabled": false,
-            "type": "continuous"
-        }
-    },
-    "interaction": {
-        "dragNodes": true,
-        "hideEdgesOnDrag": false,
-        "hideNodesOnDrag": false
-    },
-    "physics": {
-        "enabled": true,
-        "stabilization": {
-            "enabled": true,
-            "fit": true,
-            "iterations": 1000,
-            "onlyDynamicEdges": false,
-            "updateInterval": 50
+        'edges': {
+          'color': {
+            'inherit': true
+          },
+          'smooth': {
+            'enabled': false,
+            'type': 'continuous'
+          }
+        },
+        'interaction': {
+          'dragNodes': true,
+          'hideEdgesOnDrag': false,
+          'hideNodesOnDrag': false
+        },
+        'physics': {
+          'enabled': true,
+          'stabilization': {
+            'enabled': true,
+            'fit': true,
+            'iterations': 1000,
+            'onlyDynamicEdges': false,
+            'updateInterval': 50
         }
     }
 };

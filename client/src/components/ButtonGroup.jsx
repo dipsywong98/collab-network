@@ -2,10 +2,9 @@ import React from 'react'
 import { Flex } from '@theme-ui/components'
 import PropTypes from 'prop-types'
 
-const ButtonGroup = props => {
-  const children = React.Children.toArray(props.children)
-  return <Flex sx={{ alignItems: 'center' }}>{
-    children.map((child, k) => {
+const ButtonGroup = ({ children, ...props }) => {
+  return <Flex sx={{ alignItems: 'center' }} {...props}>{
+    React.Children.toArray(children).map((child, k) => {
       const borderLeft = k === 0 ? {} : ({ borderBottomLeftRadius: 0, borderTopLeftRadius: 0 })
       const borderRight = k === children.length - 1 ? {} : ({ borderBottomRightRadius: 0, borderTopRightRadius: 0 })
       return React.cloneElement(child, { sx: { ...borderLeft, ...borderRight } })

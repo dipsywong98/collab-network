@@ -1,10 +1,7 @@
 from flask import Flask, jsonify, send_file, request
 
 from lib.functions import *
-from lib.db import *
-from lib.cache import *
 from lib.graph import *
-
 
 print('loading graph')
 whole_graph = open_or_compute_graph('whole_graph', make_whole_graph)
@@ -17,6 +14,10 @@ app = Flask(__name__,
 
 @app.route('/api/graphs', methods=['GET'])
 def graph_htmls():
+    """
+    list the graph html files under docs/
+    :return:
+    """
     mypath = './docs'
     onlyfiles = path_to_files(mypath)
     return jsonify({'files': onlyfiles})
@@ -24,19 +25,39 @@ def graph_htmls():
 
 @app.route('/', methods=['GET'])
 def index():
+    """
+    webpage client
+    :return:
+    """
     return send_file('./client/build/index.html')
 
 
 @app.route('/api/filter', methods=['POST'])
 def filter_route():
+    """
+    filter the authors by query string
+    :return:
+    """
     body = request.get_json()
+    paginate = body['paginate'] if 'paginate' in body else None
     #  body['columns'] if 'columns' in body else ['*']
-    authors = filter_authors(body['query'])
-    return jsonify(authors)
+    rows = filter_authors(body['query'])
+    counts = len(rows)
+    if paginate is not None:
+        offset = paginate['offset']
+        length = paginate['length']
+        rows = rows[offset:(offset + length)]
+    return jsonify({'rows': rows, 'counts': counts})
 
 
 @app.route('/api/subgraphs', methods=['POST'])
 def filter_to_subgraphs():
+    """
+    get connected subgraphs
+    query parameter to search for idx to build subgraphs
+    directly give idx parameter to build subgraphs
+    :return:
+    """
     body = request.get_json()
     if 'query' in body:
         authors = filter_authors_select(body['query'], ['idx'])
@@ -51,17 +72,46 @@ def filter_to_subgraphs():
 
 @app.route('/api/filter/count', methods=['POST'])
 def filter_count():
+    """
+    count number of authors that matches the query
+    :return:
+    """
     query = request.get_json()['query']
     return jsonify({"length": len(filter_authors(query))})
 
 
 @app.route('/api/graph', methods=['POST'])
 def build_graph():
+    """
+    build the graph html file and other graph insight
+    :return:
+    """
     body = request.get_json()
     ids = body['ids']
     name = body['name']
     sub_graph = whole_graph.subgraph(ids)
-    visualize(sub_graph, name)
+    response = {}
+    if len(ids) <= 1000:
+        visualize(sub_graph, name)
+        response['name'] = name
+    else:
+        response['message'] = 'the graph is too big to visualize'
+    deg, node_id = compute_max_degree(sub_graph)
+    response['max_degree'] = deg
+    response['argmax_degree'] = node_id
+    return jsonify(response)
+
+
+@app.route('/api/path', methods=['POST'])
+def path():
+    """
+    given source and target, build the path graph
+    :return:
+    """
+    body = request.get_json()
+    source = body['source']
+    target = body['target']
+    name = body['name']
     return jsonify({"name": name})
 
 

@@ -1,6 +1,6 @@
+import matplotlib.pyplot as plt
 import networkx as nx
 from pyvis.network import Network
-import matplotlib.pyplot as plt
 
 
 def make_graph(coauth_tuples):
@@ -20,30 +20,41 @@ def make_whole_graph():
 
 
 def visualize(networkx_graph, name):
-    pyvis_graph = Network(height=800, width=800, notebook=True)
-    for node,node_attrs in networkx_graph.nodes(data=True):
-        pyvis_graph.add_node(node,**node_attrs)
+    if '.html' in name:
+        pyvis_graph = Network(height=800, width=800, notebook=True)
+        for node, node_attrs in networkx_graph.nodes(data=True):
+            pyvis_graph.add_node(node, **node_attrs)
 
-    # for each edge and its attributes in the networkx graph
-    for source,target,edge_attrs in networkx_graph.edges(data=True):
-        # if value/width not specified directly, and weight is specified, set 'value' to 'weight'
-        if not 'value' in edge_attrs and not 'width' in edge_attrs and 'weight' in edge_attrs:
-            # place at key 'value' the weight of the edge
-            edge_attrs['value']=edge_attrs['weight']
-        # add the edge
-        pyvis_graph.add_edge(source,target,**edge_attrs)
+        # for each edge and its attributes in the networkx graph
+        for source, target, edge_attrs in networkx_graph.edges(data=True):
+            # if value/width not specified directly, and weight is specified, set 'value' to 'weight'
+            if not 'value' in edge_attrs and not 'width' in edge_attrs and 'weight' in edge_attrs:
+                # place at key 'value' the weight of the edge
+                edge_attrs['value'] = edge_attrs['weight']
+            # add the edge
+            pyvis_graph.add_edge(source, target, **edge_attrs)
 
-    return pyvis_graph.show('docs/' + name)
+        return pyvis_graph.show('docs/' + name)
+    elif '.svg' in name:
+        # pos = nx.spring_layout(networkx_graph,k=0.25)
+        options = {
+            "node_color": "blue",
+            "node_size": 20,
+            "line_color": "grey",
+            "linewidths": 1,
+            "width": 1,
+        }
+        nx.draw(networkx_graph, **options)
+        plt.savefig(f"docs/{name}")
 
 
-def draw(name, G):
-    pos = nx.spring_layout(G,k=0.25,iterations=100)
-    options = {
-        "node_color": "blue",
-        "node_size": 20,
-        "line_color": "grey",
-        "linewidths": 1,
-        "width": 1,
-    }
-    nx.draw(G, pos, **options)
-    plt.savefig(f"docs/{name}.svg")
+def compute_max_degree(graph):
+    node_id = []
+    deg = 0
+    for node in nx.nodes(graph):
+        if graph.degree[node] > deg:
+            node_id = [node]
+            deg = graph.degree[node]
+        elif graph.degree[node] == deg:
+            node_id.append(node)
+    return deg, node_id

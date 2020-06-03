@@ -4,7 +4,14 @@ import MenuItem from './MenuItem'
 import IconText from './IconText'
 import PropTypes from 'prop-types'
 import { useColorMode } from 'theme-ui'
-import { mdiCircleSlice4, mdiFilter, mdiGraphql } from '@mdi/js'
+import {
+  mdiAccountSearch,
+  mdiCircleSlice4,
+  mdiGraphOutline,
+  mdiGraphql,
+  mdiMapMarkerPath,
+  mdiVectorLine
+} from '@mdi/js'
 import Button from './Button'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
@@ -77,7 +84,10 @@ const SideBarContent = () => {
           <Box pt={3} px={3}>
             <Heading variant={'subheading'} color={'blue.1'}>Functions</Heading>
           </Box>
-          <SideBarItem href={`/filter-author`} path={mdiFilter}>Filter Author</SideBarItem>
+          <SideBarItem href={`/authors`} path={mdiAccountSearch}>Authors</SideBarItem>
+          <SideBarItem href={`/subgraphs`} path={mdiGraphOutline}>Subgraphs</SideBarItem>
+          <SideBarItem href={`/path`} path={mdiVectorLine}>Path</SideBarItem>
+          <SideBarItem href={`/degree`} path={mdiMapMarkerPath}>Degree</SideBarItem>
         </Box>
 
         <Box mb={4}>

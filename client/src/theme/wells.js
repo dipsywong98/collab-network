@@ -1,7 +1,7 @@
 import { colors } from './colors'
 import { transparentize } from 'polished'
 
-const baseWell = {
+export const baseWell = {
   p: 3,
   my: 3,
   borderRadius: 1,

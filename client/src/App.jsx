@@ -4,11 +4,11 @@ import { Global } from '@emotion/core'
 import theme from './theme'
 import SideBar from './components/SideBar'
 import { Box } from '@theme-ui/components'
-import { BrowserRouter as Router, Route, Switch, } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Home from './Pages/Home'
-import EmbedGraph from './components/EmbedGraph'
 import Graphs from './Pages/Graphs'
-import Filter from './Pages/Filter'
+import Subgraphs from './Pages/Subgraphs'
+import Authors from './Pages/Authors'
 
 const MyGlobal = () => (
   <Global
@@ -59,8 +59,11 @@ function App() {
             <Route path='/graphs/:graph'>
               <Graphs/>
             </Route>
-            <Route path='/filter-author'>
-              <Filter/>
+            <Route path='/subgraphs'>
+              <Subgraphs/>
+            </Route>
+            <Route path='/authors'>
+              <Authors/>
             </Route>
           </Switch>
         </Box>

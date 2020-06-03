@@ -1,8 +1,9 @@
-from .db import *
-from .cache import *
 from os import listdir
 from os.path import isfile, join, isdir
+
 from .author import *
+from .cache import *
+from .db import *
 
 
 def path_to_files(path):
@@ -17,8 +18,7 @@ def path_to_files(path):
 
 def filter_authors(values):
     """
-    :param fields:
-    :param column_values_tuples: [(column_name, [values])]
+    :param: values
     :return:
     """
     with create_connection(database_file) as conn:
@@ -29,6 +29,7 @@ def filter_authors(values):
         all_values = []
         for v in values:
             all_values += [v, v, v, v]
+        sql += ' ORDER BY id'
         print(sql, all_values)
         rows = conn.cursor().execute(sql, all_values).fetchall()
         return [Author(row) for row in rows]
