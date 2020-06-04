@@ -4,7 +4,7 @@ import { Box } from '@theme-ui/components'
 import { useAxios } from './Axios'
 import Paginate from './Paginate'
 
-const AuthorTable = tableBuilder(['ID', 'Name', 'Institute', 'Tags'], ({ it: author }) => {
+const AuthorTable = tableBuilder(['ID', 'Name', 'Affiliation', 'Tags'], ({ it: author }) => {
   return (
     <>
       <Box>{author.id}</Box>

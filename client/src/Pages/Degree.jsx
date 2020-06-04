@@ -32,6 +32,7 @@ const Path = () => {
   return (
     <Container>
       <Heading>Degree of connection</Heading>
+      <Text>Given a source author id and maximum path length (connection degree), visualize the graph</Text>
       <Flex as='form' onSubmit={handleSearch} sx={{ alignItems: 'flex-end' }}>
         <Box>
           <Input fullwidth label='Source Id' value={source} onChange={({ target }) => setSource(target.value)}/>
@@ -51,7 +52,7 @@ const Path = () => {
       {error && <Text>{error}</Text>}
       {name && <EmbedGraph graph={name}/>}
       {lengthNodes.map(([length, nodes]) => (
-        <CollapsibleWell defaultOpen={false} header={`Degree ${length}`}>
+        <CollapsibleWell key={length} defaultOpen={false} header={`Degree ${length}`}>
           <AuthorTableByIds ids={nodes}/>
         </CollapsibleWell>
       ))}

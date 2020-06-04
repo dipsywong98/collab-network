@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Box, Container, Flex, Heading } from '@theme-ui/components'
+import { Box, Container, Flex, Heading, Text } from '@theme-ui/components'
 import Input from '../components/Input'
 import Button from '../components/Button'
 import { useAxios } from '../components/Axios'
@@ -25,6 +25,7 @@ const Subgraphs = () => {
   return (
     <Container>
       <Heading>Subgraphs</Heading>
+      <Text>Given a keyword, visualize the connected subgraphs of authors who holds the common keyword</Text>
       <Flex as='form' onSubmit={handleSearch} sx={{ alignItems: 'flex-end' }}>
         <Input fullwidth label='Filter' value={queryString} onChange={({ target }) => setQueryString(target.value)}/>
         <Box ml={3}>

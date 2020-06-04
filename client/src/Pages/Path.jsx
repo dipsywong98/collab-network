@@ -30,6 +30,7 @@ const Path = () => {
   return (
     <Container>
       <Heading>Shortest Path</Heading>
+      <Text>Given the source and target author id, find and visualize the shortest path between them</Text>
       <Flex as='form' onSubmit={handleSearch} sx={{ alignItems: 'flex-end' }}>
         <Box>
           <Input fullwidth label='Source Id' value={source} onChange={({ target }) => setSource(target.value)}/>
