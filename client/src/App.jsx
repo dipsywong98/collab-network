@@ -4,7 +4,7 @@ import { Global } from '@emotion/core'
 import theme from './theme'
 import SideBar from './components/SideBar'
 import { Box } from '@theme-ui/components'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { HashRouter, Route, Switch } from 'react-router-dom'
 import Home from './Pages/Home'
 import Graphs from './Pages/Graphs'
 import Subgraphs from './Pages/Subgraphs'
@@ -36,7 +36,7 @@ const withApp = WrappedComponent => {
 
 function App() {
   return (
-    <Router>
+    <HashRouter>
       <Box sx={{
         position: 'fixed',
         top: 0,
@@ -77,7 +77,7 @@ function App() {
         </Box>
       </Box>
 
-    </Router>
+    </HashRouter>
   )
 }
 
