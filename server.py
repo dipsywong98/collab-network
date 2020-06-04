@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, send_file, request
+from flask import Flask, jsonify, send_file, request, send_from_directory
 
 from lib.functions import *
 from lib.graph import *
@@ -10,6 +10,11 @@ print('graph ready', len(whole_graph.nodes()))
 app = Flask(__name__,
             static_url_path='',
             static_folder='client/build')
+
+
+@app.route('/graphFiles/<path:path>')
+def send_graph_html(path):
+    return send_from_directory('docs', path)
 
 
 @app.route('/api/graphs', methods=['GET'])
