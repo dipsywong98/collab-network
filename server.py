@@ -65,7 +65,7 @@ def filter_to_subgraphs():
         subgraphs = whole_graph.subgraph([str(r[0]) for r in authors])
     else:
         subgraphs = whole_graph.subgraph(body['ids'])
-    subgraphs = [list(g.nodes()) for g in list(nx.connected_component_subgraphs(subgraphs))]
+    subgraphs = [list(g) for g in list(nx.connected_components(subgraphs))]
     subgraphs.sort(key=len, reverse=True)
     return jsonify(subgraphs)
 
