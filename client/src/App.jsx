@@ -10,6 +10,7 @@ import Graphs from './Pages/Graphs'
 import Subgraphs from './Pages/Subgraphs'
 import Authors from './Pages/Authors'
 import Path from './Pages/Path'
+import Degree from './Pages/Degree'
 
 const MyGlobal = () => (
   <Global
@@ -68,6 +69,9 @@ function App() {
             </Route>
             <Route path='/path'>
               <Path/>
+            </Route>
+            <Route path='/degree'>
+              <Degree/>
             </Route>
           </Switch>
         </Box>

@@ -1,5 +1,5 @@
 import { Box, Flex, Heading } from '@theme-ui/components'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import MenuItem from './MenuItem'
 import IconText from './IconText'
 import PropTypes from 'prop-types'
@@ -16,25 +16,30 @@ import Button from './Button'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
-const SideBarItem = (props) => (
-  <Box
-    sx={{
-      cursor: 'pointer',
-      borderRightColor: 'yellow.1',
-      borderRightStyle: 'solid',
-      borderRightWidth: props.active ? 3 : 0
-    }}>
-    <Link to={props.href}>
-      <MenuItem>
-        <IconText
-          path={props.path}
-          color={props.active ? 'yellow.1' : 'fgs.0'}>
-          {props.children}
-        </IconText>
-      </MenuItem>
-    </Link>
-  </Box>
-)
+const SideBarItem = (props) => {
+  let { pathname } = useLocation()
+  const active = props.active || pathname.includes(props.href)
+  return (
+    <Box
+      sx={{
+        cursor: 'pointer',
+        borderRightColor: 'yellow.1',
+        borderRightStyle: 'solid',
+        borderRightWidth: active ? 3 : 0
+      }}>
+      <Link to={props.href}>
+        <MenuItem>
+          <IconText
+            sx={{ overflowX: 'hidden' }}
+            path={props.path}
+            color={active ? 'yellow.1' : 'fgs.0'}>
+            {props.children}
+          </IconText>
+        </MenuItem>
+      </Link>
+    </Box>
+  )
+}
 
 SideBarItem.propTypes = {
   href: PropTypes.string.isRequired,

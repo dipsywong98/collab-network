@@ -134,6 +134,33 @@ def get_path():
         return jsonify({'error': 'no path between %s and %s' % (source, target)})
 
 
+@app.route('/api/degree', methods=['POST'])
+def get_degree_connection():
+    """
+    given source and degree, generate the subgraph of maximum degree
+    :return:
+    """
+    body = request.get_json()
+    source = body['source']
+    degree = body['degree']
+    name = f"degree_{source}_{degree}.html"
+    if 'name' in body:
+        name = body['name']
+    node_distance = nx.single_source_shortest_path_length(whole_graph, source=source, cutoff=degree)
+    nodes = [n for n in node_distance]
+    if len(nodes) <= 1000:
+        visualize(whole_graph.subgraph(nodes), name)
+        return jsonify({
+            'name': name,
+            'dict': node_distance
+        })
+    else:
+        return jsonify({
+            'error': 'The graph is too big to visualize',
+            'dict': node_distance
+        })
+
+
 # @app.route('/<path:path>')
 # def client(path):
 #     return send_from_directory('./client/build', path)
@@ -141,6 +168,8 @@ def get_path():
 # if __name__ == '__main__':
 #     http_server = WSGIServer(('', 4000), app)
 #     http_server.serve_forever()
+
+
 print('server ready')
 
 app.run(host='0.0.0.0', port=4000, debug=True)
