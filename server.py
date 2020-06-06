@@ -1,4 +1,5 @@
 import subprocess
+from threading import Thread
 
 from flask import Flask, jsonify, send_file, request, send_from_directory
 
@@ -170,15 +171,50 @@ def get_degree_connection():
 
 @app.route('/api/pull', methods=['POST', 'GET'])
 def pull():
+    print('pulling')
     out = subprocess.Popen(['sh', 'pull.sh'],
                            stdout=subprocess.PIPE,
                            stderr=subprocess.STDOUT)
     stdout, stderr = out.communicate()
+    print('stdout: ' + str(stdout))
+    print('stderr: ' + str(stderr))
     return jsonify({
         'success': str(stderr) == 'None',
         'stdout': str(stdout),
         'stderr': str(stderr)
     })
+
+
+status = {}
+
+
+@app.route('/api/pull/async', methods=['POST', 'GET'])
+def pull_async():
+    def work():
+        global status
+        print('pulling')
+        status = {'message': 'pulling'}
+        out = subprocess.Popen(['sh', 'pull.sh'],
+                               stdout=subprocess.PIPE,
+                               stderr=subprocess.STDOUT)
+        stdout, stderr = out.communicate()
+        print('stdout: ' + str(stdout))
+        print('stderr: ' + str(stderr))
+        status = {
+            'message': 'done',
+            'success': str(stderr) == 'None',
+            'stdout': str(stdout),
+            'stderr': str(stderr)
+        }
+
+    thread = Thread(target=work)
+    thread.start()
+    return 'started'
+
+
+@app.route('/api/pull/status', methods=['POST', 'GET'])
+def pull_status():
+    return status
 
 
 print('server ready')
