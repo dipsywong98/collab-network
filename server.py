@@ -1,3 +1,5 @@
+import subprocess
+
 from flask import Flask, jsonify, send_file, request, send_from_directory
 
 from lib.functions import *
@@ -166,13 +168,17 @@ def get_degree_connection():
         })
 
 
-# @app.route('/<path:path>')
-# def client(path):
-#     return send_from_directory('./client/build', path)
-
-# if __name__ == '__main__':
-#     http_server = WSGIServer(('', 4000), app)
-#     http_server.serve_forever()
+@app.route('/api/pull', methods=['POST', 'GET'])
+def pull():
+    out = subprocess.Popen(['sh', 'pull.sh'],
+                           stdout=subprocess.PIPE,
+                           stderr=subprocess.STDOUT)
+    stdout, stderr = out.communicate()
+    return jsonify({
+        'success': str(stderr) == 'None',
+        'stdout': str(stdout),
+        'stderr': str(stderr)
+    })
 
 
 print('server ready')

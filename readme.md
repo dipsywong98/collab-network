@@ -12,6 +12,13 @@
 
 3. install [nodejs](https://nodejs.org/en/download/), [yarn](https://classic.yarnpkg.com/en/docs/install) and [conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html)
 
+    ```shell script
+    curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+    sudo apt-get install -y nodejs
+   curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+   echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+   sudo apt update && sudo apt install yarn
+    ```
 4. build the website client which is under `client/` directory
 
     ```shell script
