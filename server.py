@@ -7,7 +7,7 @@ from lib.functions import *
 from lib.graph import *
 
 print('loading graph')
-whole_graph = open_or_compute_graph('whole_graph', make_whole_graph)
+whole_graph = open_or_compute_graph('math', make_whole_graph)
 print('graph ready', len(whole_graph.nodes()))
 
 app = Flask(__name__,
@@ -219,4 +219,4 @@ def pull_status():
 
 print('server ready')
 
-app.run(host='0.0.0.0', port=4000, debug=True)
+app.run(host='0.0.0.0', port=4000)

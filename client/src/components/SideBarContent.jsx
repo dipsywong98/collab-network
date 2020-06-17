@@ -51,13 +51,6 @@ SideBarItem.propTypes = {
 const SideBarContent = () => {
   const [colorMode, setColorMode] = useColorMode()
   const toggleDarkMode = () => setColorMode(colorMode === 'default' ? 'dark' : 'default')
-  const [graphUrls, setGraphUrls] = useState([])
-  useEffect(() => {
-    axios.get('/api/graphs').then(({ data }) => {
-      console.log(data)
-      setGraphUrls(data.files)
-    })
-  }, [])
   return (
     <React.Fragment>
       <Box>
@@ -93,17 +86,6 @@ const SideBarContent = () => {
           <SideBarItem href={`/subgraphs`} path={mdiGraphOutline}>Subgraphs</SideBarItem>
           <SideBarItem href={`/path`} path={mdiVectorLine}>Path</SideBarItem>
           <SideBarItem href={`/degree`} path={mdiMapMarkerPath}>Degree</SideBarItem>
-        </Box>
-
-        <Box mb={4}>
-          <Box pt={3} px={3}>
-            <Heading variant={'subheading'} color={'blue.1'}>Graphs</Heading>
-          </Box>
-          {
-            graphUrls.map(url => (
-              <SideBarItem key={url} href={`/graphs/${url.replace('.html', '')}`} path={mdiGraphql}>{url}</SideBarItem>
-            ))
-          }
         </Box>
 
       </Box>

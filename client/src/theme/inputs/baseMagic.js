@@ -28,7 +28,10 @@ export const fakePlaceholderPull = {
 }
 
 export const fakePlaceholderFocus = {
-  color: 'blue'
+  color: 'blue',
+  backgroundColor: 'background',
+  fontSize: 0,
+  top: '-10px'
 }
 
 export default {

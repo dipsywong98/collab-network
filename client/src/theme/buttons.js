@@ -99,9 +99,11 @@ const buttonColors = {
   }
 }
 
-const buttons = Object.assign({}, ...Object.keys(buttonStyles).flatMap((styleName) => {
-  return Object.keys(buttonColors).map((colorName) => ({
-    [colorName + styleName]: {
+const buttons = {}
+
+for (const styleName in buttonStyles) {
+  for (const colorName in buttonColors) {
+    buttons[colorName + styleName] = {
       ...buttonStyles[styleName],
       backgroundColor: buttonColors[colorName].bg,
       color: buttonColors[colorName].fg,
@@ -112,7 +114,7 @@ const buttons = Object.assign({}, ...Object.keys(buttonStyles).flatMap((styleNam
         backgroundColor: buttonColors[colorName].hoverBg
       }
     }
-  }))
-}))
+  }
+}
 
 export default buttons

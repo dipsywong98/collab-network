@@ -29,15 +29,9 @@ def create_table(conn, create_table_sql):
 def create_author_table(conn):
     sql_create_authors_table = """
         CREATE TABLE IF NOT EXISTS authors (
-            id integer PRIMARY KEY,
-            idx text,
+            id text PRIMARY KEY,
             n text NOT NULL,
             a text NOT NULL,
-            pc integer ,
-            cn integer,
-            hi integer,
-            pi REAL,
-            upi REAL,
             t text
         );
         """
