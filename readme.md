@@ -4,11 +4,11 @@
 
 [Offline App(windows)](
 https://hkustconnect-my.sharepoint.com/:u:/g/personal/ycwongal_connect_ust_hk/EYHoYibXDy9PgSSSgCLutw4B4ABsm7KPFmeaxPPkVpvlKQ?e=IuGeMW
-)
+) (no need set up, just download and play, have fun!)
 
 [Report](https://drive.google.com/file/d/1bUHnvHQ416e3MyFHgweG4s1--C_hVzoV/view?usp=sharing)
 
-## Set up the application
+## Set up the application server
 
 1. git clone the project
 
