@@ -5,9 +5,10 @@ from flask import Flask, jsonify, send_file, request, send_from_directory
 
 from lib.functions import *
 from lib.graph import *
+import webbrowser
 
 print('loading graph')
-whole_graph = open_or_compute_graph('math', make_whole_graph)
+whole_graph = open_or_compute_graph('whole_graph', make_whole_graph)
 print('graph ready', len(whole_graph.nodes()))
 
 app = Flask(__name__,
@@ -218,5 +219,5 @@ def pull_status():
 
 
 print('server ready')
-
+webbrowser.open('http://localhost:4000', new=2)
 app.run(host='0.0.0.0', port=4000)

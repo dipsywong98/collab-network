@@ -1,5 +1,13 @@
 # collab-network
 
+## Download
+
+[Offline App(windows)](
+https://hkustconnect-my.sharepoint.com/:u:/g/personal/ycwongal_connect_ust_hk/EYHoYibXDy9PgSSSgCLutw4B4ABsm7KPFmeaxPPkVpvlKQ?e=IuGeMW
+)
+
+[Report](https://drive.google.com/file/d/1bUHnvHQ416e3MyFHgweG4s1--C_hVzoV/view?usp=sharing)
+
 ## Set up the application
 
 1. git clone the project
@@ -36,3 +44,10 @@
     ```shell script
     python server.py
     ```
+
+## Build and Publish
+
+use virtual env to install all the dependencies
+https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/
+
+using virtual env run `python build.py`

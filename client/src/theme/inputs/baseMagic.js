@@ -28,10 +28,7 @@ export const fakePlaceholderPull = {
 }
 
 export const fakePlaceholderFocus = {
-  color: 'blue',
-  backgroundColor: 'background',
-  fontSize: 0,
-  top: '-10px'
+  color: 'blue'
 }
 
 export default {
@@ -39,10 +36,11 @@ export default {
   '+ *': {
     ...fakePlaceholder
   },
-  ':focus + *, :not(:placeholder-shown) + *': {
+  ':not(:placeholder-shown) + *': {
     ...fakePlaceholderPull
   },
   ':focus + *': {
+    ...fakePlaceholderPull,
     ...fakePlaceholderFocus
   }
 }

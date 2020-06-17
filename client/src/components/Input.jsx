@@ -28,7 +28,10 @@ const Input = ({ onClearClick, ...props }) => (
         variant='inputMagic'
         sx={{ width: props.fullwidth ?? false ? '100%' : undefined, ...props.sx }}
       />
-      <Text>{props.label}</Text>
+      <Text sx={(props.value ? {
+        backgroundColor: 'background',
+        fontSize: 0,
+        top: '-10px'} : null)}>{props.label}</Text>
       {!(props.disabled ?? false) && onClearClick !== undefined
         ? <Box sx={{ position: 'absolute', right: 1, top: '50%', transform: 'translateY(-50%)' }}>
           <IconButton variant='transparent-borderless-sm' path={mdiClose} onClick={onClearClick}/>
